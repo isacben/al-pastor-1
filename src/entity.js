@@ -5,14 +5,19 @@ export default class Entity {
     color = "";
 
     constructor(type, pos, size, color) {
+        this.type = type;
         this.pos = pos;
         this.size = size;
         this.color = color;
     }
 
-    draw(ctx){
+    draw(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+    }
+
+    move(ctx) {
+        this.pos.x += -1;
     }
 
     get getPosition() {

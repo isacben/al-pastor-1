@@ -7,7 +7,7 @@ export default class Player extends Entity {
     jumpForce = 11;
 
     constructor() {
-        super({x: 20, y: 250 - 48}, {w: 48, h: 48}, "blue");
+        super("player", {x: 20, y: 250 - 48}, {w: 48, h: 48}, "blue");
     }
 
     jump() {

@@ -1,9 +1,10 @@
 export default class Entity {
+    type = "";
     pos = {x: 0, y: 0};
     size = {w: 0, h: 0};
     color = "";
 
-    constructor(pos, size, color) {
+    constructor(type, pos, size, color) {
         this.pos = pos;
         this.size = size;
         this.color = color;

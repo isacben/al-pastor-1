@@ -16,8 +16,8 @@ export default class Entity {
         ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
     }
 
-    move(ctx) {
-        this.pos.x += -1;
+    move(vel) {
+        this.pos.x += -vel;
     }
 
     get getPosition() {

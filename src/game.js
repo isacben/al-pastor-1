@@ -15,6 +15,9 @@ export default class Game {
     tacoTimer = 0;
     tacoInterval = 200;
 
+    enemyTimer = 0;
+    enemyInterval = 300;
+
     score = 0;
 
     constructor() {
@@ -31,7 +34,8 @@ export default class Game {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.showScore();
 
-        this.addThing();
+        this.addTaco();
+        this.addEnemy();
 
         if (this.jump) {
             this.player.jump();
@@ -40,21 +44,20 @@ export default class Game {
         this.player.tick(this.things);
         this.player.draw(this.ctx);
 
-        //this.things[0].draw(this.ctx);
-
         this.things.forEach(thing => {
-            //thing.tick()
-            
-            if (thing.type !== "ground") {
-                thing.move();
+            if (thing.type === "taco") {
+                thing.move(2);
+            } else if (thing.type === "enemy") {
+                thing.move(3);
             }
             thing.draw(this.ctx);
         });
 
         this.deleteThing(); 
+        this.gameOver();
     }
 
-    addThing(){
+    addTaco(){
         if (this.tacoTimer > this.tacoInterval) {
             this.things.push(
                 new Entity(
@@ -64,10 +67,27 @@ export default class Game {
                     "brown"
                 )
             );
-            console.log(this.things) 
+            //console.log(this.things) 
             this.tacoTimer = 0;
         } else {
             this.tacoTimer++;
+        }
+    }
+
+    addEnemy(){
+        if (this.enemyTimer > this.enemyInterval) {
+            this.things.push(
+                new Entity(
+                    "enemy",
+                    {x: 300, y:250 - 32},
+                    {w: 32, h: 32},   
+                    "violet"
+                )
+            );
+            console.log(this.things) 
+            this.enemyTimer = 0;
+        } else {
+            this.enemyTimer++;
         }
     }
 
@@ -96,6 +116,14 @@ export default class Game {
             case " ":
                 this.jump = isDown;
                 break;
+        }
+    }
+
+    gameOver() {
+        if (this.player.getHit) {
+            this.ctx.font = "32px Arail";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("Game Over", 150, 70);
         }
     }
 }

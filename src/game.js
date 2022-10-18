@@ -38,7 +38,7 @@ export default class Game {
             this.addEnemy();
         }
 
-        if (this.jump) {
+        if (this.jump & this.started) {
             this.player.jump();
         }
 
@@ -134,6 +134,7 @@ export default class Game {
         this.player.resetPlayer();
         this.started = true;
         this.things = this.things.slice(0, 1)
+        this.jump = false;
     }
 
     get isStarter() {

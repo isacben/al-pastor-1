@@ -13,7 +13,7 @@ export default class Player extends Entity {
     }
 
     jump() {
-        if (this.grounded) {
+        if (this.grounded & !this.hit) {
             this.vel.y += this.jumpForce;
         }
     }
@@ -52,7 +52,7 @@ export default class Player extends Entity {
     }
 
     dropPlayer() {
-        this.vel.y += 5;
+        //this.vel.y += 5;
     }
 
     get getScore() {
@@ -61,5 +61,10 @@ export default class Player extends Entity {
 
     get getHit() {
         return this.hit;
+    }
+
+    resetPlayer() {
+        this.score = 0;
+        this.hit = false;
     }
 }

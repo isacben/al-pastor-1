@@ -8,6 +8,7 @@ export default class Game {
     ctx = canvas.getContext("2d");
     player = new Player();
     jump = false;
+    started = false;
 
     ground = new Entity("ground", {x: 0, y: 250}, {w: 300, h: 10}, "red");
     things = [this.ground];
@@ -17,8 +18,6 @@ export default class Game {
 
     enemyTimer = 0;
     enemyInterval = 300;
-
-    score = 0;
 
     constructor() {
         this.canvas.width = 300;
@@ -32,10 +31,12 @@ export default class Game {
 
         this.ctx.fillStyle = "yellow";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.showScore();
+        this.showScore(this.player.getScore);
 
-        this.addTaco();
-        this.addEnemy();
+        if (this.started) {
+            this.addTaco();
+            this.addEnemy();
+        }
 
         if (this.jump) {
             this.player.jump();
@@ -99,23 +100,24 @@ export default class Game {
         });
     }
 
-    showScore() {
-        this.score = this.player.getScore;
+    showScore(score) {
         this.ctx.fillStyle = "black";
         this.ctx.font = "16px Arial";
         this.ctx.textAlign = "right";
-        this.ctx.fillText(this.score, 290, 25);
+        this.ctx.fillText(score, 290, 25);
     }
 
     handleKey(ev, isDown) {
-        switch (ev.key) {
-            default:
-                return;
-            case "ArrowUp":
-            case "w":
-            case " ":
-                this.jump = isDown;
-                break;
+        if (!this.player.getHit) {
+            switch (ev.key) {
+                default:
+                    return;
+                case "ArrowUp":
+                case "w":
+                case " ":
+                    this.jump = isDown;
+                    break;
+            }
         }
     }
 
@@ -124,6 +126,17 @@ export default class Game {
             this.ctx.font = "32px Arail";
             this.ctx.textAlign = "center";
             this.ctx.fillText("Game Over", 150, 70);
+            this.started = false;
         }
+    }
+
+    restart() {
+        this.player.resetPlayer();
+        this.started = true;
+        this.things = this.things.slice(0, 1)
+    }
+
+    get isStarter() {
+        return this.started;
     }
 }

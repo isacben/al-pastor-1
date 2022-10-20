@@ -3,6 +3,7 @@ export default class Entity {
     pos = {x: 0, y: 0};
     size = {w: 0, h: 0};
     color = "";
+    img = new Image();
 
     constructor(type, pos, size, color) {
         this.type = type;
@@ -12,8 +13,14 @@ export default class Entity {
     }
 
     draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+        if (this.type === "taco") {
+            this.img.src = "../img/".concat(this.type, ".png");
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(this.img, this.pos.x, this.pos.y, 10*3, 8*3);
+        } else {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+        }
     }
 
     move(vel) {

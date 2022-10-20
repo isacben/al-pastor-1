@@ -10,7 +10,7 @@ export default class Game {
     jump = false;
     started = false;
 
-    ground = new Entity("ground", {x: 0, y: 250}, {w: 300, h: 10}, "red");
+    ground = new Entity("ground", {x: 0, y: 250}, {w: 300, h: 10}, "#5d6872");
     things = [this.ground];
 
     tacoTimer = 0;
@@ -29,7 +29,7 @@ export default class Game {
 
     tick(){
 
-        this.ctx.fillStyle = "yellow";
+        this.ctx.fillStyle = "#6b9acf";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.showScore(this.player.getScore);
 
@@ -65,7 +65,7 @@ export default class Game {
                     "taco",
                     {x: 300, y:100},
                     {w: 32, h: 32},
-                    "brown"
+                    "#be955c"
                 )
             );
             //console.log(this.things) 
@@ -82,7 +82,7 @@ export default class Game {
                     "enemy",
                     {x: 300, y:250 - 32},
                     {w: 32, h: 32},   
-                    "violet"
+                    "#6e6962"
                 )
             );
             console.log(this.things) 

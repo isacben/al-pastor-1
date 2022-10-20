@@ -3,13 +3,20 @@ import Entity from "./entity.js";
 export default class Player extends Entity {
     vel = {x: 0, y: 0};
     grounded = false;
-    gravity = 0.2;
+    gravity = 0.25;
     jumpForce = 8;
     score = 0;
     hit = false;
+    img = new Image();
 
     constructor() {
-        super("player", {x: 20, y: 250 - 48}, {w: 48, h: 48}, "blue");
+        super("player", {x: 20, y: 250 - 60}, {w: 48, h: 60}, "#9a4f50");
+        this.img.src = "../img/player.png";
+    }
+
+    draw(ctx) {
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(this.img, this.pos.x, this.pos.y, 20*3, 20*3);
     }
 
     jump() {

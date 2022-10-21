@@ -80,8 +80,8 @@ export default class Game {
             this.things.push(
                 new Entity(
                     "enemy",
-                    {x: 300, y:250 - 32},
-                    {w: 32, h: 32},   
+                    {x: 300, y:(250 - 60)},
+                    {w: 14*3, h: 20*3},   
                     "#6e6962"
                 )
             );

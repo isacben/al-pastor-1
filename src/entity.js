@@ -17,7 +17,16 @@ export default class Entity {
             this.img.src = "../img/".concat(this.type, ".png");
             ctx.imageSmoothingEnabled = false;
             ctx.drawImage(this.img, this.pos.x, this.pos.y, 10*3, 8*3);
-        } else {
+        } else if (this.type === "ground") {
+            this.img.src = "../img/".concat(this.type, ".png");
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(this.img, this.pos.x, this.pos.y, 400*3, 20*3);
+        } else if (this.type === "enemy") {
+            this.img.src = "../img/".concat("cactus", ".png");
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(this.img, this.pos.x, this.pos.y, 14*3, 20*3);
+        }
+        else {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
         }

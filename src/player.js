@@ -3,8 +3,8 @@ import Entity from "./entity.js";
 export default class Player extends Entity {
     vel = {x: 0, y: 0};
     grounded = false;
-    gravity = 0.25;
-    jumpForce = 8;
+    gravity = 0.2;
+    jumpForce = 7;
     score = 0;
     hit = false;
     img = new Image();

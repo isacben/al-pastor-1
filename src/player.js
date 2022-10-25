@@ -23,7 +23,7 @@ export default class Player extends Entity {
         if (this.grounded & !this.hit) {
             this.vel.y += this.jumpForce;
             this.frameTimer = 0;
-            this.status = "idle";
+            this.status = "jumping";
         }
     }
 
@@ -68,7 +68,7 @@ export default class Player extends Entity {
         if (this.vel.y > 0) {
             //console.log("UP");
         } else if (this.vel.y < 0 && !this.grounded && !this.hit && this.isStarted) {
-            this.status = "idle";
+            this.status = "jumping";
         }
     }
 
@@ -77,6 +77,9 @@ export default class Player extends Entity {
         switch (this.status) {
             case "idle":
                 ctx.drawImage(this.img, 0, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
+                break;
+            case "jumping":
+                ctx.drawImage(this.img, 20, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
                 break;
             case "running":
                 if (this.frameTimer % this.frameTrigger === 0) {

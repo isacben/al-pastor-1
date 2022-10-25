@@ -43,7 +43,7 @@ export default class Game {
         }
 
         this.player.tick(this.things);
-        this.player.draw(this.ctx);
+        this.player.animate(this.ctx);
 
         this.things.forEach(thing => {
             if (thing.type === "taco") {
@@ -85,7 +85,7 @@ export default class Game {
                     "#6e6962"
                 )
             );
-            console.log(this.things) 
+            //console.log(this.things) 
             this.enemyTimer = 0;
         } else {
             this.enemyTimer++;

@@ -4,28 +4,31 @@ export default class Player extends Entity {
     vel = {x: 0, y: 0};
     grounded = false;
     gravity = 0.2;
-    jumpForce = 7;
+    jumpForce = 7.1;
     score = 0;
     hit = false;
+    isStarted = false;
     img = new Image();
+    status = "idle";
+    frameTimer = 0;
+    frameTrigger = 10;
+    frame = 1;
 
     constructor() {
         super("player", {x: 20, y: 250 - 60}, {w: 48, h: 60}, "#9a4f50");
         this.img.src = "../img/player.png";
     }
 
-    draw(ctx) {
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(this.img, this.pos.x, this.pos.y, 20*3, 20*3);
-    }
-
     jump() {
         if (this.grounded & !this.hit) {
             this.vel.y += this.jumpForce;
+            this.frameTimer = 0;
+            this.status = "idle";
         }
     }
 
     tick(entities) {
+        this.frameTimer++;
         this.pos.y -= this.vel.y;
 
         this.grounded = false;
@@ -43,7 +46,7 @@ export default class Player extends Entity {
                 }
                 this.vel.y -= this.gravity;
             } else if (entity.type === "taco") {
-                if (this.checkCollision(entity)) {
+                if (this.checkCollision(entity) && !this.hit) {
                     object.splice(index, 1);
                     this.score++;
                 }
@@ -53,14 +56,45 @@ export default class Player extends Entity {
                     this.vel.y += 5;
                     //object.splice(index, 1);
                     this.hit = true;
+                    this.status = "idle";
                 }
             }
         });
+
+        if (this.grounded && !this.hit && this.isStarted) {
+            this.status = "running";
+        }
+
+        if (this.vel.y > 0) {
+            //console.log("UP");
+        } else if (this.vel.y < 0 && !this.grounded && !this.hit && this.isStarted) {
+            this.status = "idle";
+        }
     }
 
-    dropPlayer() {
-        //this.vel.y += 5;
+    animate(ctx) {
+        ctx.imageSmoothingEnabled = false;
+        switch (this.status) {
+            case "idle":
+                ctx.drawImage(this.img, 0, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
+                break;
+            case "running":
+                if (this.frameTimer % this.frameTrigger === 0) {
+                    if (this.frame === 6) {
+                        this.frame = 1;
+                    } else {
+                        this.frame += 1;
+                    }
+                    //console.log(this.frameTimer);
+                }
+                ctx.drawImage(this.img, this.frame*20, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
+                break;
+        }
     }
+
+    //dropPlayer() {
+        //this.vel.y += 5;
+    //}
 
     get getScore() {
         return this.score;
@@ -73,5 +107,7 @@ export default class Player extends Entity {
     resetPlayer() {
         this.score = 0;
         this.hit = false;
+        this.isStarted = true;
+        this.frameTimer = 0;
     }
 }

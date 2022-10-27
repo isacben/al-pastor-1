@@ -56,7 +56,7 @@ export default class Player extends Entity {
                     this.vel.y += 5;
                     //object.splice(index, 1);
                     this.hit = true;
-                    this.status = "idle";
+                    this.status = "lost";
                 }
             }
         });
@@ -78,8 +78,11 @@ export default class Player extends Entity {
             case "idle":
                 ctx.drawImage(this.img, 0, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
                 break;
+            case "lost":
+                ctx.drawImage(this.img, 20*8, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
+                break;
             case "jumping":
-                ctx.drawImage(this.img, 20, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
+                ctx.drawImage(this.img, 20*7, 0, 20, 20, this.pos.x, this.pos.y, 20*3, 20*3);
                 break;
             case "running":
                 if (this.frameTimer % this.frameTrigger === 0) {

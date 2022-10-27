@@ -10,7 +10,7 @@ export default class Game {
     jump = false;
     started = false;
 
-    ground = new Entity("ground", {x: 0, y: 250}, {w: 300, h: 10}, "#5d6872");
+    ground = new Entity("ground", {x: 0, y: 250}, {w: 600, h: 10}, "#5d6872");
     things = [this.ground];
 
     tacoTimer = 0;
@@ -29,13 +29,16 @@ export default class Game {
 
     tick(){
 
-        this.ctx.fillStyle = "#6b9acf";
+        this.ctx.fillStyle = "#aae0f3";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.showScore(this.player.getScore);
 
         if (this.started) {
             this.addTaco();
             this.addEnemy();
+
+            // move the ground
+            this.things[0].move(1);
         }
 
         if (this.jump & this.started) {
@@ -127,6 +130,9 @@ export default class Game {
             this.ctx.textAlign = "center";
             this.ctx.fillText("Game Over", 150, 70);
             this.started = false;
+
+            // stop moving the ground
+            this.things[0].move(0);
         }
     }
 

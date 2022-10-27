@@ -34,6 +34,9 @@ export default class Entity {
 
     move(vel) {
         this.pos.x += -vel;
+        if (this.pos.x === -550 && this.type === "ground") {
+            this.pos.x = 0;
+        }
     }
 
     get getPosition() {

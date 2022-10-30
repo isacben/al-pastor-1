@@ -11,7 +11,7 @@ export default class Player extends Entity {
     img = new Image();
     status = "idle";
     frameTimer = 0;
-    frameTrigger = 10;
+    frameTrigger = 9;
     frame = 1;
 
     constructor() {

@@ -20,7 +20,7 @@ export default class Entity {
         } else if (this.type === "ground") {
             this.img.src = "../img/".concat(this.type, ".png");
             ctx.imageSmoothingEnabled = false;
-            ctx.drawImage(this.img, this.pos.x, this.pos.y, 400*3, 20*3);
+            ctx.drawImage(this.img, this.pos.x, this.pos.y, 360*3, 20*3);
         } else if (this.type === "enemy") {
             this.img.src = "../img/".concat("cactus", ".png");
             ctx.imageSmoothingEnabled = false;
@@ -34,7 +34,8 @@ export default class Entity {
 
     move(vel) {
         this.pos.x += -vel;
-        if (this.pos.x === -550 && this.type === "ground") {
+        if (this.pos.x === -720 && this.type === "ground") {
+            console.log(this.pos.x);
             this.pos.x = 0;
         }
     }

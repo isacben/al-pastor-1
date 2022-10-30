@@ -6,11 +6,12 @@ import Player from "./player.js";
 export default class Game {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    cover = new Image();
     player = new Player();
     jump = false;
     started = false;
 
-    ground = new Entity("ground", {x: 0, y: 250}, {w: 600, h: 10}, "#5d6872");
+    ground = new Entity("ground", {x: 0, y: 250}, {w: 900, h: 10}, "#5d6872");
     things = [this.ground];
 
     tacoTimer = 0;
@@ -22,7 +23,7 @@ export default class Game {
     constructor() {
         this.canvas.width = 300;
         this.canvas.height = 300;
-
+        this.cover.src = "../img/cover.png";
         document.addEventListener("keydown", (ev) => this.handleKey(ev, true));
         document.addEventListener("keyup", (ev) => this.handleKey(ev, false));
     }
@@ -39,7 +40,9 @@ export default class Game {
 
             // move the ground
             this.things[0].move(1);
-        }
+        } //else {
+            //this.ctx.drawImage(this.cover, 0, 0, 150*2, 100*2);
+        //}
 
         if (this.jump & this.started) {
             this.player.jump();
@@ -104,10 +107,11 @@ export default class Game {
     }
 
     showScore(score) {
-        this.ctx.fillStyle = "black";
-        this.ctx.font = "16px Arial";
-        this.ctx.textAlign = "right";
-        this.ctx.fillText(score, 290, 25);
+        // this.ctx.fillStyle = "black";
+        // this.ctx.font = "16px Arial";
+        // this.ctx.textAlign = "right";
+        // this.ctx.fillText(score, 290, 25);
+        document.getElementById("score").textContent = score;
     }
 
     handleKey(ev, isDown) {
@@ -126,13 +130,11 @@ export default class Game {
 
     gameOver() {
         if (this.player.getHit) {
-            this.ctx.font = "32px Arail";
-            this.ctx.textAlign = "center";
-            this.ctx.fillText("Game Over", 150, 70);
             this.started = false;
 
             // stop moving the ground
             this.things[0].move(0);
+            document.getElementById("game-over").style = "display:block";
         }
     }
 
@@ -143,7 +145,7 @@ export default class Game {
         this.jump = false;
     }
 
-    get isStarter() {
+    get isStarted() {
         return this.started;
     }
 }

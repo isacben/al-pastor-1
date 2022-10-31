@@ -35,7 +35,7 @@ export default class Entity {
     move(vel) {
         this.pos.x += -vel;
         if (this.pos.x === -720 && this.type === "ground") {
-            console.log(this.pos.x);
+            //console.log(this.pos.x);
             this.pos.x = 0;
         }
     }

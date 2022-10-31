@@ -15,7 +15,7 @@ export default class Game {
     things = [this.ground];
 
     tacoTimer = 0;
-    tacoInterval = 200;
+    tacoInterval = 300;
 
     enemyTimer = 0;
     enemyInterval = 300;
@@ -39,10 +39,8 @@ export default class Game {
             this.addEnemy();
 
             // move the ground
-            this.things[0].move(1);
-        } //else {
-            //this.ctx.drawImage(this.cover, 0, 0, 150*2, 100*2);
-        //}
+            this.things[0].move(2);
+        } 
 
         if (this.jump & this.started) {
             this.player.jump();
@@ -75,7 +73,7 @@ export default class Game {
                 )
             );
             //console.log(this.things) 
-            this.tacoTimer = 0;
+            this.tacoTimer = Math.floor(Math.random() * 3) * 100;
         } else {
             this.tacoTimer++;
         }
@@ -92,7 +90,7 @@ export default class Game {
                 )
             );
             //console.log(this.things) 
-            this.enemyTimer = 0;
+            this.enemyTimer = Math.floor(Math.random() * 3) * 100;
         } else {
             this.enemyTimer++;
         }

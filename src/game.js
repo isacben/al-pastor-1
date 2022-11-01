@@ -26,6 +26,8 @@ export default class Game {
         this.cover.src = "../img/cover.png";
         document.addEventListener("keydown", (ev) => this.handleKey(ev, true));
         document.addEventListener("keyup", (ev) => this.handleKey(ev, false));
+        document.addEventListener("mousedown", (ev) => this.handleMouse(true));
+        document.addEventListener("mouseup", (ev) => this.handleMouse(false));
     }
 
     tick(){
@@ -124,6 +126,10 @@ export default class Game {
                     break;
             }
         }
+    }
+
+    handleMouse(isDown) {
+        this.jump = isDown;
     }
 
     gameOver() {

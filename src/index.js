@@ -6,13 +6,12 @@ let startTime = 0;
 
 function loop(timestamp) {
     const elapsed = timestamp - startTime;
-    if (elapsed > 10) {
+    if (elapsed > 16) {
         startTime = timestamp;
         game.tick();
     }
 
     if (!game.isStarted) {
-        document.getElementById("startbutton").disabled = false;
         document.getElementById("startbutton").style = "display:block";
         document.getElementById("cover").style = "display:block";
     }
@@ -24,10 +23,10 @@ function start() {
     cancelAnimationFrame(requestId);
     game.restart();
 
-    document.getElementById("startbutton").disabled = true;
     document.getElementById("startbutton").style = "display:none";
     document.getElementById("cover").style = "display:none";
     document.getElementById("game-over").style = "display:none";
-    loop();
+    document.getElementById("score").textContent = 0;
+    loop(0);
 }
 document.getElementById("startbutton").addEventListener("click", start);

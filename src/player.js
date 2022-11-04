@@ -54,6 +54,7 @@ export default class Player extends Entity {
             if (this.checkCollision(taco) && !this.hit) {
                 taco.setPositionX(-70);
                 this.score++;
+                document.getElementById("score").textContent = this.score;
                 zzfx(...[1.02,0,1300,.01,.04,.18,1,1.07,,,-50,.02,,,,,,.58,.02]);
             }
         });
@@ -87,10 +88,6 @@ export default class Player extends Entity {
                 ctx.drawImage(this.playerImage, frame, 0, 60, 60, this.pos.x, this.pos.y, 60, 60);
                 break;
         }
-    }
-
-    get getScore() {
-        return this.score;
     }
 
     get getHit() {

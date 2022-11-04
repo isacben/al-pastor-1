@@ -37,13 +37,12 @@ export default class Game {
     }
 
     tick(){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         if (this.started) {
             this.showCactus(this.ctx);
             this.showTacos(this.ctx);
             this.ground.move(4);
-            this.showScore(this.player.getScore);
 
             if (this.jump) {
                 this.player.jump();
@@ -63,13 +62,13 @@ export default class Game {
 
     showCactus(ctx) {
         this.cacti[0].draw(ctx);
-        this.cacti[0].move(5);
+        this.cacti[0].move(6);
         if (this.cacti[0].pos.x + this.cacti[0].size.w < 0) {
             this.cacti[0].setPositionX(Math.floor(Math.random() * 5) * 100 + 300 + this.cacti[1].getPosition.x);
         }
 
         this.cacti[1].draw(ctx);
-        this.cacti[1].move(5);
+        this.cacti[1].move(6);
         if (this.cacti[1].pos.x + this.cacti[1].size.w < 0) {
             this.cacti[1].setPositionX(Math.floor(Math.random() * 4) * 100 + 300 +this.cacti[0].getPosition.x);
         }
@@ -87,10 +86,6 @@ export default class Game {
         if (this.tacos[1].pos.x + this.tacos[1].size.w < 0) {
             this.tacos[1].setPositionX(Math.floor(Math.random() * 3) * 100 + 300 + this.tacos[0].getPosition.x);
         }
-    }
-
-    showScore(score) {
-        document.getElementById("score").textContent = score;
     }
 
     handleKey(ev, isDown) {

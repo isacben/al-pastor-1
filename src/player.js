@@ -24,7 +24,7 @@ export default class Player extends Entity {
             this.vel.y += this.jumpForce;
             this.frameTimer = 0;
             this.status = "jumping";
-            //zzfx(...[.8,,471,.04,.02,.06,2,.87,3.3,,,,,,,,,.61,.04]);
+            zzfx(...[.8,,471,.04,.02,.06,2,.87,3.3,,,,,,,,,.61,.04]);
         }
     }
 
@@ -43,16 +43,16 @@ export default class Player extends Entity {
         cacti.forEach((cactus) => {
             if (this.checkCollision(cactus) && !this.hit) {
                 this.vel.y = 0;
-                this.vel.y += 5;
+                this.vel.y += 8;
                 this.hit = true;
                 this.status = "lost";
-                //zzfx(...[1.15,0,79,.03,.01,.08,2,2.14,,-0.6,,,,.8,,.4,,.65,.03,.12]);
+                zzfx(...[1.15,0,79,.03,.01,.08,2,2.14,,-0.6,,,,.8,,.4,,.65,.03,.12]);
             }
         });
 
         tacos.forEach((taco) => {
             if (this.checkCollision(taco) && !this.hit) {
-                //zzfx(...[1.02,0,1300,.01,.04,.18,1,1.07,,,-50,.02,,,,,,.58,.02]);
+                zzfx(...[1.02,0,1300,.01,.04,.18,1,1.07,,,-50,.02,,,,,,.58,.02]);
                 taco.setPositionX(-70);
                 this.score++;
             }
